@@ -1,0 +1,14 @@
+{% load static %}
+<a style="font-size:18px" href="{%url 'polls:index' %}">ВЕРНУТЬСЯ К ВЫБОРУ ОПРОСОВ</a>
+<h1 style="color: red">РЕЗУЛЬТАТЫ ОПРОСА</h1>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style3.css' %}">
+<h1>для вопроса:{{ question.question_text }}</h1>
+<hr align="left" width="500" size="2" color="Red" />
+<ul>
+{% for choice in question.choice_set.all %}
+    <li style="font-size:23px">{{ choice.choice_text }} - {{ choice.votes }} голосов</li>
+{% endfor %}
+</ul>
+
+<a style="font-size:18px" href="{% url 'polls:detail' question.id %}">Ответить еще раз...</a>

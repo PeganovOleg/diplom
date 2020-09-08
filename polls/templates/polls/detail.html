@@ -1,0 +1,23 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+<a style="font-size:18px" href="{%url 'polls:index' %}">ВЕРНУТЬСЯ К ВЫБОРУ ОПРОСОВ</a>
+<h1 style="color: #800000">ВЫБЕРИТЕ ВАРИАНТ ОТВЕТА:</h1>
+<h2 style="color: #800000">вопрос:{{ question.question_text }}</h2>
+
+<hr align="left" width="500" size="2" color="Red" />
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Ответ">
+</form>
+
+ 

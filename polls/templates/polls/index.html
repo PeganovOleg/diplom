@@ -1,0 +1,26 @@
+{% load static %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<h1 style="color: #000080">ВЫБЕРИТЕ ОПРОС</h1>
+{% block content %}
+	{% if user.is_authenticated %}
+     	<div class="card text-center">
+     		<div class="card-body">
+     			<p><a href="{% url 'logout' %}">Выйти</a></p>
+     	</div>
+		</div>  		
+{% endif %}
+{% endblock %}     			
+
+
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет доступных опросов</p>
+{% endif %}

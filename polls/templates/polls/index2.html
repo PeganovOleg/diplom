@@ -1,0 +1,22 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<h1 style="color: red">ПРЕДЛАГАЕМ ПРОЙТИ ОПРОСЫ</h1>
+{% block content %}
+	{% if user.is_authenticated %}
+     	<div class="card text-center">
+     		<div class="card-body">
+          <p style="font-size:23px">Финальный F2.2 Project</p>
+     			<h1 style="color:#800080">{{ user.get_username }}, добро пожаловать!</h1>
+          <li><a href="{% url 'polls:index'%}">ОТКРЫТЬ ОПРОСЫ</a></li> 
+          <p style="font-size:23px"><a href="{% url 'logout' %}">Выйти</a></p>
+				
+        
+							</div>
+		</div>  
+   {% else %}
+   		<li>Для просмотра этой страницы войдите в ккаунт </li>
+   		<li><a href="{% url 'login'%}?next={{request.path}}">Войти</a></li>  
+   {% endif %}
+
+{% endblock %}
